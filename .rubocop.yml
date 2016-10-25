@@ -1,0 +1,93 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'config.ru'
+    - 'db/**/*'
+    - 'deploy/*'
+    - 'vendor/**/*'
+
+Rails:
+  Enabled: true
+
+# Enable 20 lines in a method instead of the default 10
+#
+Metrics/MethodLength:
+  Enabled: true
+  Max: 20
+
+# Enable a little more complexity than the standard 15
+#
+Metrics/AbcSize:
+  Max: 23
+
+# Don't complain about long classes just yet
+#
+Metrics/ClassLength:
+  Enabled: false
+
+# The standard 80 character length can be difficult in Ruby at times
+#
+Metrics/LineLength:
+  Max: 120
+
+# Don't be picky about parameter alignment
+#
+Style/AlignParameters:
+  Enabled: false
+
+# Don't be picky about paren alignment
+#
+Style/ClosingParenthesisIndentation:
+  Enabled: false
+
+# Explicit returns are fine
+#
+Style/RedundantReturn:
+  Enabled: false
+
+# Don't try to align parens in a multiline method call
+#
+Style/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+# I agree that documentation is good, but it should not be required in all cases
+#
+Style/Documentation:
+  Enabled: false
+
+# I like using parens because it makes the intention clear that you are calling a method
+#
+Style/MethodCallParentheses:
+  Enabled: false
+
+# While this is intended to aid upgrading, adding frozen_string_literal: true to the top of
+# every file is awful
+#
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Don't enforce a guard clause on short methods
+#
+Style/GuardClause:
+  MinBodyLength: 3
+
+# Allow normal word arrays
+#
+Style/WordArray:
+  Enabled: false
+
+# It's ok to have an empty line at the top of a class, module, or block
+#
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Allow using Foo::Bar style class declaration style
+#
+Style/ClassAndModuleChildren:
+  Enabled: false
