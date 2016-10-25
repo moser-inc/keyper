@@ -1,15 +1,15 @@
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require 'tb_api_keys/version'
+require 'tb_api/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = 'tb_api_keys'
-  s.version     = TbApiKeys::VERSION
+  s.name        = 'tb_api'
+  s.version     = TbApi::VERSION
   s.authors     = ['Greg Woods']
   s.email       = ['greg.woods@moserit.com']
-  s.homepage    = 'https://bitbucket.org/moser-inc/tb_api_keys'
+  s.homepage    = 'https://bitbucket.org/moser-inc/tb_api'
   s.summary     = 'Add API keys to a twice baked application'
   s.description = 'Add API keys to a twice baked application'
   s.license     = 'MIT'

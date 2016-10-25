@@ -1,4 +1,4 @@
-module TbApiKeys
+module TbApi
   module ApplicationHelper
   end
 end

@@ -1,3 +1,3 @@
-module TbApiKeys
+module TbApi
   VERSION = '0.1.0'.freeze
 end

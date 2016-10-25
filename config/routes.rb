@@ -1,2 +1,2 @@
-TbApiKeys::Engine.routes.draw do
+TbApi::Engine.routes.draw do
 end

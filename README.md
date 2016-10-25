@@ -1,4 +1,4 @@
-# TbApiKeys
+# TbApi
 Short description and motivation.
 
 ## Usage
@@ -8,7 +8,7 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'tb_api_keys'
+gem 'tb_api'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install tb_api_keys
+$ gem install tb_api
 ```
 
 ## Contributing

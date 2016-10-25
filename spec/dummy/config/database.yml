@@ -12,4 +12,4 @@ default: &default
 
 test:
   <<: *default
-  database: tb_api_keys_test
+  database: tb_api_test
