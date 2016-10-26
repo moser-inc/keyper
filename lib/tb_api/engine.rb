@@ -3,8 +3,6 @@ require 'bcrypt'
 
 module TbApi
   class Engine < ::Rails::Engine
-    require "#{root}/lib/tb_api/errors"
-
     engine_name 'tb_api'
     # isolate_namespace TbApi
     # config.autoload_paths += Dir["#{config.root}/lib/**/"]
@@ -16,10 +14,10 @@ module TbApi
       g.helper true
     end
 
-    # initializer 'tb_redirects.models' do |_config|
-    #   ActiveSupport.on_load(:active_record) do
-    #     SpudUser.send :include, TbApi::HasApiKeys
-    #   end
-    # end
+    initializer 'tb_redirects.models' do |_config|
+      ActiveSupport.on_load(:active_record) do
+        SpudUser.send :include, TbApi::HasApiKeys
+      end
+    end
   end
 end

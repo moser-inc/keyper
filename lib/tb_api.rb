@@ -1,5 +1,6 @@
 require 'tb_api/engine'
 
 module TbApi
-  # Your code goes here...
+  require 'tb_api/configuration'
+  require 'tb_api/errors'
 end

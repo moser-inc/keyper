@@ -3,6 +3,7 @@
 This engine adds basic API functionality to a [twice baked](https://bitbucket.org/moser-inc/tb_core) rails application. It enables mobile apps to login to your web service, request a set of API credentials, and then authenticate subsequent requests with key and secret headers.
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -35,6 +36,14 @@ API key authentication is not enabled globally. Instead, you should include the 
 class ProtectedStuffController < ApplicationController
   include TbApi::ApiKeyAuthentication
   before_action :require_user
+end
+```
+
+You can then optionally configure the engine, or leave it at the [default settings](lib/tb_api/configuration.rb).
+
+```ruby
+TbApi.configure do |config|
+  config.invalidate_keys_on_password_change = true
 end
 ```
 
