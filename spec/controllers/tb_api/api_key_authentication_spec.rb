@@ -8,6 +8,11 @@ RSpec.describe ApplicationController, type: :controller do
     include TbApi::ApiKeyAuthentication
   end
 
+  before :each do
+    @api_key = FactoryGirl.create(:tb_api_key)
+    controller.reset_session
+  end
+
   describe '#current_user' do
     it 'falls back to normal session management' do
       activate_session()
@@ -15,9 +20,9 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     it 'returns an api key user' do
-      api_key = FactoryGirl.create(:tb_api_key)
-      request.headers[KEY] = api_key.api_key
-      request.headers[SECRET] = api_key.password
+      activate_authlogic()
+      request.headers[KEY] = @api_key.api_key
+      request.headers[SECRET] = @api_key.password
       expect(controller.current_user).to be_a(SpudUser)
     end
   end
@@ -36,26 +41,24 @@ RSpec.describe ApplicationController, type: :controller do
 
   describe '#authenticate_with_api_keys' do
     it 'raises an error when the key is not found' do
-      request.headers[TbApi::ApiKeyAuthentication::API_KEY] = 'nope'
-      request.headers[TbApi::ApiKeyAuthentication::API_SECRET] = 'wrong'
+      request.headers[KEY] = 'nope'
+      request.headers[SECRET] = 'wrong'
       expect do
         controller.send(:authenticate_with_api_keys)
       end.to raise_error(TbApi::ApiKeyError)
     end
 
     it 'raises an error when the secret is not valid' do
-      api_key = FactoryGirl.create(:tb_api_key)
-      request.headers[TbApi::ApiKeyAuthentication::API_KEY] = api_key.api_key
-      request.headers[TbApi::ApiKeyAuthentication::API_SECRET] = 'wrong'
+      request.headers[KEY] = @api_key.api_key
+      request.headers[SECRET] = 'wrong'
       expect do
         controller.send(:authenticate_with_api_keys)
       end.to raise_error(TbApi::ApiKeyError)
     end
 
     it 'returns the user' do
-      api_key = FactoryGirl.create(:tb_api_key)
-      request.headers[TbApi::ApiKeyAuthentication::API_KEY] = api_key.api_key
-      request.headers[TbApi::ApiKeyAuthentication::API_SECRET] = api_key.password
+      request.headers[KEY] = @api_key.api_key
+      request.headers[SECRET] = @api_key.password
       result = controller.send(:authenticate_with_api_keys)
       expect(result).to be_a(SpudUser)
     end
