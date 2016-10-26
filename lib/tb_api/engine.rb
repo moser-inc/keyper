@@ -14,7 +14,7 @@ module TbApi
       g.helper true
     end
 
-    initializer 'tb_redirects.models' do |_config|
+    initializer 'tb_api.models' do |_config|
       ActiveSupport.on_load(:active_record) do
         SpudUser.send :include, TbApi::HasApiKeys
       end
