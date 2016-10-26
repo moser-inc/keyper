@@ -1,4 +1,5 @@
 class TbApi::ApiKeysController < Spud::ApplicationController
+  include TbApi::ApiKeyAuthentication
   before_action :require_user, except: [:create]
   skip_before_action :verify_authenticity_token
   respond_to :json
