@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025201134) do
+ActiveRecord::Schema.define(version: 20161026165645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,4 +74,16 @@ ActiveRecord::Schema.define(version: 20161025201134) do
     t.index ["spud_role_id"], name: "index_spud_users_on_spud_role_id", using: :btree
   end
 
+  create_table "tb_api_keys", force: :cascade do |t|
+    t.integer  "spud_user_id"
+    t.string   "api_key",         null: false
+    t.string   "password_digest", null: false
+    t.datetime "last_used_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["api_key"], name: "index_tb_api_keys_on_api_key", unique: true, using: :btree
+    t.index ["spud_user_id"], name: "index_tb_api_keys_on_spud_user_id", using: :btree
+  end
+
+  add_foreign_key "tb_api_keys", "spud_users"
 end

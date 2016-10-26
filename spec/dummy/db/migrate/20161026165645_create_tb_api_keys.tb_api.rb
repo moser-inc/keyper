@@ -1,3 +1,4 @@
+# This migration comes from tb_api (originally 20161025210140)
 class CreateTbApiKeys < ActiveRecord::Migration[5.0]
   def change
     create_table :tb_api_keys do |t|

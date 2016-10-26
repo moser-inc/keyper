@@ -1,4 +1,5 @@
 require 'tb_core'
+require 'bcrypt'
 
 module TbApi
   class Engine < ::Rails::Engine

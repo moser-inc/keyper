@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     tb_api (0.1.0)
+      bcrypt
       rails (~> 5.0.0, >= 5.0.0.1)
       tb_core (>= 1.4.beta2)
 
@@ -54,6 +55,7 @@ GEM
       scrypt (>= 1.2, < 4.0)
     autoprefixer-rails (6.5.1.1)
       execjs
+    bcrypt (3.1.10)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)

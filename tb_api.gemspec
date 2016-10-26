@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 5.0.0', '>= 5.0.0.1'
   s.add_dependency 'tb_core', '>= 1.4.beta2'
+  s.add_dependency 'bcrypt'
 
   s.add_development_dependency 'pg', '>= 0.15'
   s.add_development_dependency 'rspec-rails'
