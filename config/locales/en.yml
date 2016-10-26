@@ -1,0 +1,6 @@
+en:
+  tb_core:
+    errors:
+      api_key:
+        title: "Invalid API key"
+        message: "The passed API key and secret combination is not valid"

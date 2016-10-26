@@ -3,6 +3,8 @@ require 'bcrypt'
 
 module TbApi
   class Engine < ::Rails::Engine
+    require "#{root}/lib/tb_api/errors"
+
     engine_name 'tb_api'
     # isolate_namespace TbApi
     # config.autoload_paths += Dir["#{config.root}/lib/**/"]
