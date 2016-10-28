@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 20161026165645) do
     t.string   "api_key",         null: false
     t.string   "password_digest", null: false
     t.datetime "last_used_at"
+    t.string   "last_used_ip"
+    t.string   "last_used_ua"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["api_key"], name: "index_tb_api_keys_on_api_key", unique: true, using: :btree

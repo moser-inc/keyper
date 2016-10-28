@@ -31,6 +31,13 @@ module TbApi::ApiKeyAuthentication
     unless key && key.authenticate(request.headers[API_SECRET])
       raise TbApi::ApiKeyError
     end
+    if key.should_update_attributes?
+      key.update(
+        last_used_at: Time.zone.now,
+        last_used_ip: request.remote_ip,
+        last_used_ua: request.user_agent
+      )
+    end
     key.spud_user
   end
 end

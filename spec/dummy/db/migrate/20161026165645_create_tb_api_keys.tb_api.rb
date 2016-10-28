@@ -7,6 +7,8 @@ class CreateTbApiKeys < ActiveRecord::Migration[5.0]
       t.index :api_key, unique: true
       t.string :password_digest, null: false
       t.datetime :last_used_at
+      t.string :last_used_ip
+      t.string :last_used_ua
       t.timestamps
     end
   end

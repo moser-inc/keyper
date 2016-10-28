@@ -62,5 +62,16 @@ RSpec.describe ApplicationController, type: :controller do
       result = controller.send(:authenticate_with_api_keys)
       expect(result).to be_a(SpudUser)
     end
+
+    it 'updates the api key attributes' do
+      request.headers[KEY] = @api_key.api_key
+      request.headers[SECRET] = @api_key.password
+      expect do
+        controller.send(:authenticate_with_api_keys)
+        @api_key.reload
+      end.to change(@api_key, :last_used_at)
+        .and change(@api_key, :last_used_ip)
+        .and change(@api_key, :last_used_ua)
+    end
   end
 end

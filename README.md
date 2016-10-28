@@ -44,6 +44,7 @@ You can then optionally configure the engine, or leave it at the [default settin
 ```ruby
 TbApi.configure do |config|
   config.invalidate_keys_on_password_change = true
+  config.attribute_refresh_interval = 1.minute
 end
 ```
 
