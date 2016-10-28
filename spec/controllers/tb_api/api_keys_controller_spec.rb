@@ -13,22 +13,22 @@ RSpec.describe TbApi::ApiKeysController, type: :controller do
 
   describe 'POST #create' do
     before :each do
-      @user = create(:spud_user,
-        login: 'user',
+      @user = create(:user,
+        username: 'user',
         password: 'password'
       )
     end
     it 'creates a new API key' do
       expect do
-        post :create, params: { user_session: { login: 'user', password: 'password' } }
-      end.to change(TbApiKey.where(spud_user: @user), :count).by(1)
+        post :create, params: { user_session: { username: 'user', password: 'password' } }
+      end.to change(TbApiKey.where(user: @user), :count).by(1)
     end
     it 'returns authentication errors' do
-      post :create, params: { user_session: { login: 'wrong', password: 'nope' }, format: :json }
+      post :create, params: { user_session: { username: 'wrong', password: 'nope' }, format: :json }
       expect(response).to have_http_status(:unprocessable_entity)
     end
     it 'does not maintain a session' do
-      post :create, params: { user_session: { login: 'user', password: 'password' } }
+      post :create, params: { user_session: { username: 'user', password: 'password' } }
       expect(session['spud_user_credentials']).to be_nil
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe TbApi::ApiKeysController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the key' do
       activate_session()
-      api_key = TbApiKey.create(spud_user: current_user)
+      api_key = TbApiKey.create(user: current_user)
       expect do
         delete :destroy, params: { id: api_key.api_key }
       end.to change(TbApiKey, :count).by(-1)

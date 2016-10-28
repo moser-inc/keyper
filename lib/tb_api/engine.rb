@@ -1,4 +1,3 @@
-require 'tb_core'
 require 'bcrypt'
 
 module TbApi
@@ -14,10 +13,10 @@ module TbApi
       g.helper true
     end
 
-    initializer 'tb_api.models' do |_config|
-      ActiveSupport.on_load(:active_record) do
-        SpudUser.send :include, TbApi::HasApiKeys
-      end
-    end
+    # initializer 'tb_api.models' do |_config|
+    #   ActiveSupport.on_load(:active_record) do
+    #     SpudUser.send :include, TbApi::HasApiKeys
+    #   end
+    # end
   end
 end

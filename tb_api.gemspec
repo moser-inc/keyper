@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   s.add_dependency 'rails', '~> 5.0.0', '>= 5.0.0.1'
-  s.add_dependency 'tb_core', '>= 1.4.beta2'
+  # s.add_dependency 'tb_core', '>= 1.4.beta2'
   s.add_dependency 'bcrypt'
 
   s.add_development_dependency 'pg', '>= 0.15'
@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'rubocop'
+  # s.add_development_dependency 'authlogic'
 end

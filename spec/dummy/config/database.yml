@@ -13,3 +13,7 @@ default: &default
 test:
   <<: *default
   database: tb_api_test
+
+development:
+  <<: *default
+  database: tb_api_development

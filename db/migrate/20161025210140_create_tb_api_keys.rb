@@ -1,7 +1,7 @@
 class CreateTbApiKeys < ActiveRecord::Migration[5.0]
   def change
     create_table :tb_api_keys do |t|
-      t.references :spud_user, foreign_key: true
+      t.references :user, foreign_key: false
       t.string :api_key, null: false
       t.index :api_key, unique: true
       t.string :password_digest, null: false
