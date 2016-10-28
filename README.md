@@ -70,6 +70,12 @@ Store those values securely in your application. You can then make authenticated
 curl --header "Api-Key: 06e374a582721189a58192413190600a" --header "Api-Secret: 6240aa5521b44041d6a6874bf1001852"  http://localhost:3000/protected_stuff
 ```
 
+You can hit the `/api/api_keys/check` endpoint to quickly check the validity of your keys. A 200 response means your keys are good.
+
+```
+curl --header "Api-Key: 06e374a582721189a58192413190600a" --header "Api-Secret: 6240aa5521b44041d6a6874bf1001852"  http://localhost:3000//api/api_keys/login
+```
+
 When your user logs out, it is generally a good idea to delete the associated API key. You can do that by making a DELETE request. Pass the key and secret headers as you normally would, then specify which key you wish to delete in the restful url parameter.
 
 ```

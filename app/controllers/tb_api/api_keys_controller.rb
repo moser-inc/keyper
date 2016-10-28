@@ -36,9 +36,14 @@ class TbApi::ApiKeysController < Spud::ApplicationController
     head :ok
   end
 
+  def check
+    raise Spud::UnauthorizedError unless passed_api_keys?
+    head :ok
+  end
+
   private
 
   def user_session_params
-    params.permit(:login, :password)
+    params.require(:user_session).permit(:login, :password)
   end
 end

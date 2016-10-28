@@ -18,7 +18,7 @@ RSpec.describe TbApi::ApiKeysController, type: :controller do
         password: 'password'
       )
       expect do
-        post :create, params: { login: 'user', password: 'password' }
+        post :create, params: { user_session: { login: 'user', password: 'password' } }
       end.to change(TbApiKey.where(spud_user: user), :count).by(1)
     end
   end
@@ -31,6 +31,20 @@ RSpec.describe TbApi::ApiKeysController, type: :controller do
         delete :destroy, params: { id: api_key.api_key }
       end.to change(TbApiKey, :count).by(-1)
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'GET #check' do
+    it 'checks the api keys and returns 200' do
+      api_key = create(:tb_api_key)
+      request.headers[TbApi::ApiKeyAuthentication::API_KEY] = api_key.api_key
+      request.headers[TbApi::ApiKeyAuthentication::API_SECRET] = api_key.password
+      get :check, params: { format: :json }
+      expect(response).to have_http_status(:success)
+    end
+    it 'returns unauthorized' do
+      get :check, params: { format: :json }
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 
