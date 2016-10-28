@@ -15,15 +15,15 @@ class TbApi::ApiKeysController < Spud::ApplicationController
   end
 
   def create
-    session = SpudUserSession.create(user_session_params)
-    if session.valid?
-      @api_key = TbApiKey.create(spud_user: session.spud_user)
+    user_session = SpudUserSession.new(user_session_params)
+    if user_session.valid?
+      @api_key = TbApiKey.create(spud_user: user_session.attempted_record)
       render json: {
         api_key: @api_key.api_key,
         api_secret: @api_key.password
       }
     else
-      respond_with session
+      respond_with user_session
     end
   end
 

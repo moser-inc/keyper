@@ -12,14 +12,24 @@ RSpec.describe TbApi::ApiKeysController, type: :controller do
   end
 
   describe 'POST #create' do
-    it 'creates a new API key' do
-      user = FactoryGirl.create(:spud_user,
+    before :each do
+      @user = create(:spud_user,
         login: 'user',
         password: 'password'
       )
+    end
+    it 'creates a new API key' do
       expect do
         post :create, params: { user_session: { login: 'user', password: 'password' } }
-      end.to change(TbApiKey.where(spud_user: user), :count).by(1)
+      end.to change(TbApiKey.where(spud_user: @user), :count).by(1)
+    end
+    it 'returns authentication errors' do
+      post :create, params: { user_session: { login: 'wrong', password: 'nope' }, format: :json }
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+    it 'does not maintain a session' do
+      post :create, params: { user_session: { login: 'user', password: 'password' } }
+      expect(session['spud_user_credentials']).to be_nil
     end
   end
 
