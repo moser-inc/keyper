@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe SpudUser, type: :model do
+RSpec.describe User, type: :model do
 
   before :each do
-    @user = FactoryGirl.create(:spud_user)
+    @user = FactoryGirl.create(:user)
     @count = 3
-    @count.times { FactoryGirl.create(:tb_api_key, spud_user: @user) }
+    @count.times { FactoryGirl.create(:tb_api_key, user: @user) }
   end
 
   describe 'has_many' do

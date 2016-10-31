@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
+  include Keyper::TestHelper
   KEY = TbApi::ApiKeyAuthentication::API_KEY
   SECRET = TbApi::ApiKeyAuthentication::API_SECRET
 
@@ -9,21 +10,20 @@ RSpec.describe ApplicationController, type: :controller do
   end
 
   before :each do
-    @api_key = FactoryGirl.create(:tb_api_key)
+    @api_key = create(:tb_api_key)
     controller.reset_session
   end
 
   describe '#current_user' do
     it 'falls back to normal session management' do
       activate_session()
-      expect(controller.current_user).to be_a(SpudUser)
+      expect(controller.current_user).to be_a(User)
     end
 
     it 'returns an api key user' do
-      activate_authlogic()
       request.headers[KEY] = @api_key.api_key
       request.headers[SECRET] = @api_key.password
-      expect(controller.current_user).to be_a(SpudUser)
+      expect(controller.current_user).to be_a(User)
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe ApplicationController, type: :controller do
       request.headers[SECRET] = 'wrong'
       expect do
         controller.send(:authenticate_with_api_keys)
-      end.to raise_error(TbApi::ApiKeyError)
+      end.to raise_error(Keyper::ApiKeyError)
     end
 
     it 'raises an error when the secret is not valid' do
@@ -53,14 +53,14 @@ RSpec.describe ApplicationController, type: :controller do
       request.headers[SECRET] = 'wrong'
       expect do
         controller.send(:authenticate_with_api_keys)
-      end.to raise_error(TbApi::ApiKeyError)
+      end.to raise_error(Keyper::ApiKeyError)
     end
 
     it 'returns the user' do
       request.headers[KEY] = @api_key.api_key
       request.headers[SECRET] = @api_key.password
       result = controller.send(:authenticate_with_api_keys)
-      expect(result).to be_a(SpudUser)
+      expect(result).to be_a(User)
     end
 
     it 'updates the api key attributes' do

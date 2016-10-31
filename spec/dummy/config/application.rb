@@ -4,6 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 require 'tb_api'
+require 'authlogic'
 
 module Dummy
   class Application < Rails::Application

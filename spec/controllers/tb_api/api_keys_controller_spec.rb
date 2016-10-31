@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe TbApi::ApiKeysController, type: :controller do
+  include Keyper::TestHelper
   routes { TbApi::Engine.routes }
 
   describe 'GET #index' do
     it 'returns http success' do
-      activate_session()
-      get :index
+      activate_session
+      get :index, params: { format: :json }
       expect(response).to have_http_status(:success)
     end
   end
@@ -46,14 +47,19 @@ RSpec.describe TbApi::ApiKeysController, type: :controller do
 
   describe 'GET #check' do
     it 'checks the api keys and returns 200' do
+      activate_session
       api_key = create(:tb_api_key)
-      request.headers[TbApi::ApiKeyAuthentication::API_KEY] = api_key.api_key
-      request.headers[TbApi::ApiKeyAuthentication::API_SECRET] = api_key.password
-      get :check, params: { format: :json }
+      post :check, params: { api_key: {
+        key: api_key.api_key,
+        secret: api_key.password
+      } }
       expect(response).to have_http_status(:success)
     end
     it 'returns unauthorized' do
-      get :check, params: { format: :json }
+      post :check, params: { api_key: {
+        key: '-',
+        secret: '-'
+      } }
       expect(response).to have_http_status(:unauthorized)
     end
   end

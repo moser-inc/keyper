@@ -13,10 +13,11 @@ module TbApi
       g.helper true
     end
 
-    # initializer 'tb_api.models' do |_config|
-    #   ActiveSupport.on_load(:active_record) do
-    #     SpudUser.send :include, TbApi::HasApiKeys
-    #   end
-    # end
+    initializer 'tb_api.models' do |_config|
+      ActiveSupport.on_load(:active_record) do
+        user_class = Object.const_get(TbApi.user_class_name)
+        user_class.send :include, TbApi::HasApiKeys
+      end
+    end
   end
 end

@@ -11,8 +11,8 @@ module TbApi::ApiKeyAuthentication
     return @current_user if defined?(@current_user)
     @current_user = if passed_api_keys?
                       authenticate_with_api_keys
-                    elsif current_user_session && current_user_session.spud_user
-                      current_user_session.spud_user
+                    elsif current_user_session && current_user_session.user
+                      current_user_session.user
                     end
   end
 
@@ -24,12 +24,15 @@ module TbApi::ApiKeyAuthentication
     request.headers.key?(API_KEY) && request.headers.key?(API_SECRET)
   end
 
+  class ::Keyper::ApiKeyError < StandardError
+  end
+
   # Check the validity of the keys
   #
   def authenticate_with_api_keys
     key = TbApiKey.find_by(api_key: request.headers[API_KEY])
     unless key && key.authenticate(request.headers[API_SECRET])
-      raise TbApi::ApiKeyError
+      raise Keyper::ApiKeyError
     end
     if key.should_update_attributes?
       key.update(
@@ -38,6 +41,6 @@ module TbApi::ApiKeyAuthentication
         last_used_ua: request.user_agent
       )
     end
-    key.spud_user
+    key.user
   end
 end

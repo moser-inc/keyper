@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :tb_api_key do
-    spud_user
+    user
     api_key nil
     password_digest nil
     last_used_at nil

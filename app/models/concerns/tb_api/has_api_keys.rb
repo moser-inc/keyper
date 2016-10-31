@@ -9,6 +9,6 @@ module TbApi::HasApiKeys
   private
 
   def invalidate_api_keys
-    api_keys.destroy_all if TbApi.invalidate_keys_on_password_change && password_changed?
+    api_keys.destroy_all if TbApi.invalidate_keys_on_password_change && password_digest_changed?
   end
 end

@@ -1,36 +1,6 @@
-module Keyper
-  class Authentication
-    include ActiveModel::Model
-
-    attr_reader :user, :username, :password
-
-    validates :username, :password, presence: true
-    validate :username_and_password_are_correct
-
-    def initialize(params)
-      @username = params[:username]
-      @password = params[:password]
-    end
-
-    def username_and_password_are_correct
-      @user = authenticate_user
-      unless user
-        errors.add(:base, 'Username or password are incorrect')
-        false
-      end
-    end
-
-    def authenticate_user
-      user = Object.const_get(TbApi.user_class_name).find_by(username: @username)
-      return user if user.present? && user.authenticate(@password)
-      return nil
-    end
-  end
-end
-
 class TbApi::ApiKeysController < ApplicationController
   include TbApi::ApiKeyAuthentication
-  # before_action :require_user, except: [:create]
+  before_action :require_user, except: [:create]
   skip_before_action :verify_authenticity_token
   # respond_to :json
 
@@ -63,20 +33,28 @@ class TbApi::ApiKeysController < ApplicationController
   def destroy
     @api_key = TbApiKey.find_by!(
       api_key: params[:id],
-      spud_user: current_user
+      user: current_user
     )
     @api_key.destroy
     head :ok
   end
 
   def check
-    raise Spud::UnauthorizedError unless passed_api_keys?
-    head :ok
+    key = TbApiKey.find_by(api_key: check_api_key_params[:key])
+    if key.present? && key.authenticate(check_api_key_params[:secret])
+      head :ok
+    else
+      head :unauthorized
+    end
   end
 
   private
 
   def user_session_params
     params.require(:user_session).permit(:username, :password)
+  end
+
+  def check_api_key_params
+    params.require(:api_key).permit(:key, :secret)
   end
 end
