@@ -1,5 +1,5 @@
-TbApi::Engine.routes.draw do
-  scope module: :tb_api do
+Keyper::Engine.routes.draw do
+  scope module: :keyper do
     resources :api_keys, only: [:index, :create, :destroy] do
       post :check, on: :collection
     end

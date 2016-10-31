@@ -12,8 +12,8 @@ default: &default
 
 test:
   <<: *default
-  database: tb_api_test
+  database: keyper_test
 
 development:
   <<: *default
-  database: tb_api_development
+  database: keyper_development

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tb_api (0.1.0)
+    keyper (0.1.0)
       bcrypt
       rails (~> 5.0.0, >= 5.0.0.1)
 
@@ -186,6 +186,7 @@ DEPENDENCIES
   authlogic
   database_cleaner
   factory_girl_rails
+  keyper!
   pg (>= 0.15)
   pry
   pry-nav
@@ -194,7 +195,6 @@ DEPENDENCIES
   rspec-rails
   rubocop
   simplecov
-  tb_api!
 
 BUNDLED WITH
    1.13.1

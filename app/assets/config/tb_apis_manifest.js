@@ -1,2 +1,2 @@
-//= link_directory ../javascripts/tb_api .js
-//= link_directory ../stylesheets/tb_api .css
+//= link_directory ../javascripts/keyper .js
+//= link_directory ../stylesheets/keyper .css

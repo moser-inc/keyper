@@ -1,4 +1,4 @@
-# TbApi
+# Keyper
 
 This engine adds basic API functionality to a [twice baked](https://bitbucket.org/moser-inc/tb_core) rails application. It enables mobile apps to login to your web service, request a set of API credentials, and then authenticate subsequent requests with key and secret headers.
 
@@ -7,7 +7,7 @@ This engine adds basic API functionality to a [twice baked](https://bitbucket.or
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'tb_api'
+gem 'keyper'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install tb_api
+$ gem install keyper
 ```
 
 ## Usage
@@ -26,23 +26,23 @@ Mount the engine in our application's `routes.rb` file. This will determine the 
 
 ```ruby
 Rails.application.routes.draw do
-  mount TbApi::Engine => "/api"
+  mount Keyper::Engine => "/api"
 end
 ```
 
-API key authentication is not enabled globally. Instead, you should include the `TbApi::ApiKeyAuthentication` module selectively in any controllers you wish to expose.
+API key authentication is not enabled globally. Instead, you should include the `Keyper::ApiKeyAuthentication` module selectively in any controllers you wish to expose.
 
 ```ruby
 class ProtectedStuffController < ApplicationController
-  include TbApi::ApiKeyAuthentication
+  include Keyper::ApiKeyAuthentication
   before_action :require_user
 end
 ```
 
-You can then optionally configure the engine, or leave it at the [default settings](lib/tb_api/configuration.rb).
+You can then optionally configure the engine, or leave it at the [default settings](lib/keyper/configuration.rb).
 
 ```ruby
-TbApi.configure do |config|
+Keyper.configure do |config|
   config.invalidate_keys_on_password_change = true
   config.attribute_refresh_interval = 1.minute
 end

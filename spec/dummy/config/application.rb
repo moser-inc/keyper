@@ -3,7 +3,7 @@ require_relative 'boot'
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require 'tb_api'
+require 'keyper'
 require 'authlogic'
 
 module Dummy

@@ -6,15 +6,10 @@ module Keyper
     validates :username, :password, presence: true
     validate :username_and_password_are_correct
 
-    def initialize(params)
-      @username = params[:username]
-      @password = params[:password]
-    end
-
     def username_and_password_are_correct
-      user_class = Object.const_get(TbApi.user_class_name)
+      user_class = Object.const_get(Keyper.user_class_name)
       @user = user_class.find_by(
-        TbApi.user_finder_field => @username
+        Keyper.user_finder_field => @username
       )
       unless @user && user_authenticated?(@user, password)
         errors.add(:base, 'Username or password are incorrect')
