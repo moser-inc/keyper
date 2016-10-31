@@ -3,6 +3,8 @@ class Keyper::ApiKeysController < ApplicationController
   before_action :require_user, except: [:create]
   skip_before_action :verify_authenticity_token
 
+  respond_to :json if defined?(ActionController::Responder)
+
   def index
     @api_keys = Keyper::ApiKey.where(user: current_user).map do |api_key|
       {
@@ -21,6 +23,8 @@ class Keyper::ApiKeysController < ApplicationController
         api_key: @api_key.api_key,
         api_secret: @api_key.password
       }
+    elsif defined?(ActionController::Responder)
+      respond_with authentication
     else
       render json: {
         errors: authentication.errors
@@ -38,8 +42,8 @@ class Keyper::ApiKeysController < ApplicationController
   end
 
   def check
-    key = Keyper::ApiKey.find_by(api_key: check_api_key_params[:key])
-    if key.present? && key.authenticate(check_api_key_params[:secret])
+    key = Keyper::ApiKey.find_by(api_key: check_api_key_params[:api_key])
+    if key.present? && key.authenticate(check_api_key_params[:api_secret])
       head :ok
     else
       head :unauthorized
@@ -53,6 +57,6 @@ class Keyper::ApiKeysController < ApplicationController
   end
 
   def check_api_key_params
-    params.require(:api_key).permit(:key, :secret)
+    params.require(:api_key).permit(:api_key, :api_secret)
   end
 end
