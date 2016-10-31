@@ -1,6 +1,16 @@
 # Keyper
 
-This engine adds basic API functionality to a [twice baked](https://bitbucket.org/moser-inc/tb_core) rails application. It enables mobile apps to login to your web service, request a set of API credentials, and then authenticate subsequent requests with key and secret headers.
+This engine adds basic API functionality to a Ruby on Rails application. It enables mobile apps to login to your web service, request a set of API credentials, and then authenticate subsequent requests with key and secret headers.
+
+## Compatibility
+
+Keyper has been built with common Rails authentication practices in mind, and can work well with tools such as [has_secure_password](http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password) or [Authlogic](https://github.com/binarylogic/authlogic).
+
+Broadly speaking, Keyper assumes your application has `User` and `UserSession` models, as well as the following controller methods:
+
+- `require_user`
+- `current_user`
+- `current_user_session`
 
 ## Installation
 
