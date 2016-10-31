@@ -1,6 +1,6 @@
 class Keyper::ApiKeysController < ApplicationController
   include Keyper::ApiKeyAuthentication
-  before_action :require_user, except: [:create]
+  before_action :require_user, except: [:create, :check]
   skip_before_action :verify_authenticity_token
 
   respond_to :json if defined?(ActionController::Responder)

@@ -4,7 +4,6 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 require 'keyper'
-require 'authlogic'
 
 module Dummy
   class Application < Rails::Application

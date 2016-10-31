@@ -50,8 +50,8 @@ RSpec.describe Keyper::ApiKeysController, type: :controller do
       activate_session
       api_key = create(:api_key)
       post :check, params: { api_key: {
-        key: api_key.api_key,
-        secret: api_key.password
+        api_key: api_key.api_key,
+        api_secret: api_key.password
       } }
       expect(response).to have_http_status(:success)
     end
