@@ -11,8 +11,8 @@ module Keyper::ApiKeyAuthentication
     return @current_user if defined?(@current_user)
     @current_user = if passed_api_keys?
                       authenticate_with_api_keys
-                    elsif current_user_session && current_user_session.user
-                      current_user_session.user
+                    elsif current_user_session && current_user_session.record
+                      current_user_session.record
                     end
   end
 
