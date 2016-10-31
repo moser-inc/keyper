@@ -63,7 +63,7 @@ end
 Your mobile application should first attempt to create an API key. Make a POST request to the `/api/api_keys` endpoint, passing `:username` and `:password` parameters.
 
 ```
-curl -X POST -F 'user_session[login]=username' -F 'user_session[password]=password' http://localhost:3000/api/api_keys
+curl -X POST -F 'user_session[username]=username' -F 'user_session[password]=password' http://localhost:3000/api/api_keys
 ```
 
 Sample response:
