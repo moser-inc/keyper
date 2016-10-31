@@ -1,6 +1,5 @@
 en:
-  tb_core:
+  keyper:
     errors:
-      api_key:
-        title: "Invalid API key"
-        message: "The passed API key and secret combination is not valid"
+      api_key: The passed API key and secret combination is not valid
+      login_failed: Username or password are incorrect

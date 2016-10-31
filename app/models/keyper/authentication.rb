@@ -12,7 +12,7 @@ module Keyper
         Keyper.user_finder_field => @username
       )
       unless @user && user_authenticated?(@user, password)
-        errors.add(:base, 'Username or password are incorrect')
+        errors.add(:base, I18n.t(:login_failed, scope: [:keyper, :errors]))
         false
       end
     end

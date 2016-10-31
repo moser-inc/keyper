@@ -2,7 +2,6 @@ class Keyper::ApiKeysController < ApplicationController
   include Keyper::ApiKeyAuthentication
   before_action :require_user, except: [:create]
   skip_before_action :verify_authenticity_token
-  # respond_to :json
 
   def index
     @api_keys = Keyper::ApiKey.where(user: current_user).map do |api_key|
@@ -23,7 +22,6 @@ class Keyper::ApiKeysController < ApplicationController
         api_secret: @api_key.password
       }
     else
-      # respond_with authentication
       render json: {
         errors: authentication.errors
       }, status: :unprocessable_entity

@@ -24,15 +24,12 @@ module Keyper::ApiKeyAuthentication
     request.headers.key?(API_KEY) && request.headers.key?(API_SECRET)
   end
 
-  class ::Keyper::ApiKeyError < StandardError
-  end
-
   # Check the validity of the keys
   #
   def authenticate_with_api_keys
     key = Keyper::ApiKey.find_by(api_key: request.headers[API_KEY])
     unless key && key.authenticate(request.headers[API_SECRET])
-      raise Keyper::ApiKeyError
+      raise Keyper::ApiKeyError, I18n.t(:api_key, scope: [:keyper, :errors])
     end
     if key.should_update_attributes?
       key.update(
