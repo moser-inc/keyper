@@ -13,6 +13,10 @@ module Keyper
       g.helper true
     end
 
+    initializer 'keyper.filter_parameters' do
+      Rails.application.config.filter_parameters += [:api_secret]
+    end
+
     initializer 'keyper.models' do |_config|
       ActiveSupport.on_load(:active_record) do
         user_class = Object.const_get(Keyper.user_class_name)
