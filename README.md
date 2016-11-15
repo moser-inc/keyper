@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/moser-inc/keyper/badges/gpa.svg)](https://codeclimate.com/github/moser-inc/keyper)
+[![Build Status](https://semaphoreci.com/api/v1/moser-it/keyper/branches/master/shields_badge.svg)](https://semaphoreci.com/moser-it/keyper)
+
 # Keyper
 
 This engine adds basic API functionality to a Ruby on Rails application. It enables mobile apps to login to your web service, request a set of API credentials, and then authenticate subsequent requests with key and secret headers.
