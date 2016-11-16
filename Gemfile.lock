@@ -3,7 +3,7 @@ PATH
   specs:
     keyper (0.1.0)
       bcrypt
-      rails (~> 5.0.0, >= 5.0.0.1)
+      rails (~> 5.0, >= 5.0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -183,4 +183,4 @@ DEPENDENCIES
   simplecov
 
 BUNDLED WITH
-   1.13.1
+   1.13.6
