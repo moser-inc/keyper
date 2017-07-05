@@ -14,6 +14,6 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem 'pry'
+gem 'pry-nav'
 gem 'pry-rails'
 gem 'pry-remote'
-gem 'pry-nav'

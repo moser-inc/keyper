@@ -8,10 +8,41 @@ AllCops:
     - 'deploy/*'
     - 'vendor/**/*'
     - 'spec/dummy/**/*'
-    - 'spec/spec_helper.rb'
 
 Rails:
   Enabled: true
+
+# Don't be picky about parameter alignment
+#
+Layout/AlignParameters:
+  Enabled: false
+
+# Don't be picky about paren alignment
+#
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+# It's ok to have an empty line at the top of a class, module, or block
+#
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Don't try to align parens in a multiline method call
+#
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+# Don't enforce block length in specs or other files where blocks tend to be long
+#
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
 
 # Enable 20 lines in a method instead of the default 10
 #
@@ -34,24 +65,9 @@ Metrics/ClassLength:
 Metrics/LineLength:
   Max: 120
 
-# Don't be picky about parameter alignment
+# Allow using Foo::Bar style class declaration style
 #
-Style/AlignParameters:
-  Enabled: false
-
-# Don't be picky about paren alignment
-#
-Style/ClosingParenthesisIndentation:
-  Enabled: false
-
-# Explicit returns are fine
-#
-Style/RedundantReturn:
-  Enabled: false
-
-# Don't try to align parens in a multiline method call
-#
-Style/MultilineMethodCallBraceLayout:
+Style/ClassAndModuleChildren:
   Enabled: false
 
 # I agree that documentation is good, but it should not be required in all cases
@@ -59,9 +75,9 @@ Style/MultilineMethodCallBraceLayout:
 Style/Documentation:
   Enabled: false
 
-# I like using parens because it makes the intention clear that you are calling a method
+# Dont require empty methods are on a single line
 #
-Style/MethodCallParentheses:
+Style/EmptyMethod:
   Enabled: false
 
 # While this is intended to aid upgrading, adding frozen_string_literal: true to the top of
@@ -75,21 +91,22 @@ Style/FrozenStringLiteralComment:
 Style/GuardClause:
   MinBodyLength: 3
 
+# I like using parens because it makes the intention clear that you are calling a method
+#
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: false
+
+# Explicit returns are fine
+#
+Style/RedundantReturn:
+  Enabled: false
+
+# Allow normal arrays of symbols
+#
+Style/SymbolArray:
+  Enabled: false
+
 # Allow normal word arrays
 #
 Style/WordArray:
-  Enabled: false
-
-# It's ok to have an empty line at the top of a class, module, or block
-#
-Style/EmptyLinesAroundClassBody:
-  Enabled: false
-Style/EmptyLinesAroundModuleBody:
-  Enabled: false
-Style/EmptyLinesAroundBlockBody:
-  Enabled: false
-
-# Allow using Foo::Bar style class declaration style
-#
-Style/ClassAndModuleChildren:
   Enabled: false
