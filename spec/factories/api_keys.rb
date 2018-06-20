@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :api_key, class: 'Keyper::ApiKey' do
     user
     api_key nil

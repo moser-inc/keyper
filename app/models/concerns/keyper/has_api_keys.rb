@@ -2,7 +2,11 @@ module Keyper::HasApiKeys
   extend ActiveSupport::Concern
 
   included do
-    has_many :api_keys, class_name: 'Keyper::ApiKey', foreign_key: :user_id, dependent: :destroy
+    has_many :api_keys,
+      class_name: 'Keyper::ApiKey',
+      foreign_key: :user_id,
+      dependent: :destroy,
+      inverse_of: :user
     before_update :invalidate_api_keys
   end
 

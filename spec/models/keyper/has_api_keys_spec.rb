@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Keyper::HasApiKeys, type: :model do
 
   before :each do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @count = 3
     @count.times { create(:api_key, user: @user) }
   end

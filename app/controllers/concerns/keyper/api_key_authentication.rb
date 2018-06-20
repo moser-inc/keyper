@@ -12,7 +12,7 @@ module Keyper::ApiKeyAuthentication
     return @current_user if defined?(@current_user)
     @current_user = if passed_api_keys?
                       authenticate_with_api_keys
-                    elsif current_user_session && current_user_session.record
+                    elsif current_user_session&.record
                       current_user_session.record
                     end
   end
@@ -29,7 +29,7 @@ module Keyper::ApiKeyAuthentication
   #
   def authenticate_with_api_keys
     key = Keyper::ApiKey.find_by(api_key: request.headers[API_KEY])
-    unless key && key.authenticate(request.headers[API_SECRET])
+    unless key&.authenticate(request.headers[API_SECRET])
       raise Keyper::ApiKeyError, I18n.t(:api_key, scope: [:keyper, :errors])
     end
     if key.should_update_attributes?
